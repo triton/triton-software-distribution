@@ -44,7 +44,7 @@ wrapPythonProgramsIn() {
                 echo "wrapping \`$f'..."
                 # The magicalSedExpression will invoke a "$(basename "$f")", so
                 # if you change $f to something else, be sure to also change it
-                # in pkgs/top-level/python-packages.nix!
+                # in sets/python-packages.nix!
                 sed -i "$f" -re '@magicalSedExpression@'
                 # wrapProgram creates the executable shell script described
                 # above. The script will set PYTHONPATH and PATH variables.!

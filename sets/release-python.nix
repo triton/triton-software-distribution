@@ -1,6 +1,6 @@
 /*
    test for example like this
-   $ hydra-eval-jobs pkgs/top-level/release-python.nix
+   $ hydra-eval-jobs sets/release-python.nix
 */
 
 { nixpkgs ? { outPath = (import ./all-packages.nix {}).lib.cleanSource ../..; revCount = 1234; shortRev = "abcdef"; }
@@ -9,7 +9,7 @@
   supportedSystems ? [ "x86_64-linux" ]
 }:
 
-with import ../../lib;
+with import ../lib;
 with import ./release-lib.nix {inherit supportedSystems; };
 
 let

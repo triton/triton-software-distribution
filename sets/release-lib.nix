@@ -4,7 +4,7 @@
 , scrubJobs ? true
 }:
 
-with import ../../lib;
+with import ../lib;
 
 let
   allPackages' = args: allPackages args // {

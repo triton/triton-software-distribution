@@ -2,11 +2,11 @@
    Everything defined here ends up in the Nixpkgs channel.  Individual
    jobs can be tested by running:
 
-   $ nix-build pkgs/top-level/release.nix -A <jobname>.<system>
+   $ nix-build sets/release.nix -A <jobname>.<system>
 
    e.g.
 
-   $ nix-build pkgs/top-level/release.nix -A coreutils.x86_64-linux
+   $ nix-build sets/release.nix -A coreutils.x86_64-linux
 */
 
 { nixpkgs ? { outPath = (import ./all-packages.nix {}).lib.cleanSource ../..; revCount = 1234; shortRev = "abcdef"; }
@@ -27,8 +27,8 @@ let
 
       metrics = import ./metrics.nix { inherit pkgs nixpkgs; };
 
-      manual = import ../../doc;
-      lib-tests = import ../../lib/tests/release.nix { inherit nixpkgs; };
+      manual = import ../doc;
+      lib-tests = import ../lib/tests/release.nix { inherit nixpkgs; };
 
       unstable = pkgs.releaseTools.aggregate
         { name = "nixpkgs-${jobs.tarball.version}";
@@ -155,7 +155,6 @@ let
       netcat = all;
       nss_ldap = linux;
       nssmdns = linux;
-      ocaml = linux;
       pciutils = linux;
       pdf2xml = all;
       php = linux;
@@ -212,7 +211,6 @@ let
       xpdf = linux;
       xscreensaver = linux;
       xsel = linux;
-      xterm = linux;
       zdelta = linux;
       zsh = linux;
 
@@ -234,8 +232,6 @@ let
         strategoShell = linux;
         dryad = linux;
       };
-
-      ocamlPackages = { };
 
       perlPackages = { };
 
@@ -303,12 +299,6 @@ let
       };
 
       linuxPackages_testing = { };
-      linuxPackages_grsec_stable_desktop = { };
-      linuxPackages_grsec_stable_server = { };
-      linuxPackages_grsec_stable_server_xen = { };
-      linuxPackages_grsec_testing_desktop = { };
-      linuxPackages_grsec_testing_server = { };
-      linuxPackages_grsec_testing_server_xen = { };
 
     } ));
 

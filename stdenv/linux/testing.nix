@@ -1,5 +1,5 @@
-{ allPackages ? (import ../../top-level/all-packages.nix)
-, lib ? (import ../../../lib)
+{ allPackages ? (import ../../sets/all-packages.nix)
+, lib ? (import ../../lib)
 , targetSystem ? builtins.currentSystem
 , hostSystem ? builtins.currentSystem
 , config ? { }

@@ -10,12 +10,12 @@ Usage:
   To ensure that prerequisite are met those are added before the task itself by
   textClosureDupList. Duplicated items are removed again.
 
-  See trace/nixpkgs/trunk/pkgs/top-level/builder-defs.nix for some predefined build steps
+  See trace/nixpkgs/trunk/sets/builder-defs.nix for some predefined build steps
 
   Attention:
 
   let
-    pkgs = (import /etc/nixos/nixpkgs/pkgs/top-level/all-packages.nix) {};
+    pkgs = (import /etc/nixos/nixpkgs/sets/all-packages.nix) {};
   in let
     inherit (pkgs.stringsWithDeps) fullDepEntry packEntry noDepEntry textClosureMap;
     inherit (pkgs.lib) id;

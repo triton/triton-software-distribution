@@ -40,31 +40,31 @@ let
 
   # Stage 1 pkgs, builds wheel dists
   buildBootstrapPythonPackage = makeOverridable (
-    callPackage ../all-pkgs/b/build-python-package rec {
+    callPackage ../pkgs/b/build-python-package rec {
       stage = 1;
       namePrefix = python.libPrefix + "-stage1-";
 
       # Stage 0 pkgs, builds basic egg dists
-      appdirs = callPackage ../all-pkgs/a/appdirs/bootstrap.nix { };
-      packaging = callPackage ../all-pkgs/p/packaging/bootstrap.nix {
+      appdirs = callPackage ../pkgs/a/appdirs/bootstrap.nix { };
+      packaging = callPackage ../pkgs/p/packaging/bootstrap.nix {
         inherit
           pyparsing
           six;
       };
-      pip = callPackage ../all-pkgs/p/pip/bootstrap.nix {
+      pip = callPackage ../pkgs/p/pip/bootstrap.nix {
         inherit
           setuptools;
       };
-      pyparsing = callPackage ../all-pkgs/p/pyparsing/bootstrap.nix { };
-      setuptools = callPackage ../all-pkgs/s/setuptools/bootstrap.nix {
+      pyparsing = callPackage ../pkgs/p/pyparsing/bootstrap.nix { };
+      setuptools = callPackage ../pkgs/s/setuptools/bootstrap.nix {
         inherit
           appdirs
           packaging
           pyparsing
           six;
       };
-      six = callPackage ../all-pkgs/s/six/bootstrap.nix { };
-      wheel = callPackage ../all-pkgs/w/wheel/bootstrap.nix {
+      six = callPackage ../pkgs/s/six/bootstrap.nix { };
+      wheel = callPackage ../pkgs/w/wheel/bootstrap.nix {
         inherit
           setuptools;
       };
@@ -73,7 +73,7 @@ let
 
   # Stage 2 pkgs, builds final wheel dists
   buildPythonPackage = makeOverridable (
-    callPackage ../all-pkgs/b/build-python-package rec {
+    callPackage ../pkgs/b/build-python-package rec {
       stage = 2;
       inherit (self)
         packaging
@@ -90,7 +90,7 @@ let
         if newBootstrap == true then
           self.setuptools
         else
-          callPackage ../all-pkgs/s/setuptools/bootstrap.nix { };
+          callPackage ../pkgs/s/setuptools/bootstrap.nix { };
     }
   );
 
@@ -153,11 +153,11 @@ in {
           /^ *[^# ]/i import sys; sys.argv[0] = '"'$(basename "$f")'"'
         }
       '';
-  } ../all-pkgs/b/build-python-package/wrap.sh;
+  } ../pkgs/b/build-python-package/wrap.sh;
 
   # specials
 
-  recursivePthLoader = callPackage ../all-pkgs/r/recursive-pth-loader { };
+  recursivePthLoader = callPackage ../pkgs/r/recursive-pth-loader { };
 
 ################################################################################
 ################################################################################
@@ -171,398 +171,398 @@ in {
 ################################################################################
 ################################################################################
 
-affinity = callPackage ../all-pkgs/a/affinity { };
+affinity = callPackage ../pkgs/a/affinity { };
 
-alabaster = callPackage ../all-pkgs/a/alabaster { };
+alabaster = callPackage ../pkgs/a/alabaster { };
 
-aniso8601 = callPackage ../all-pkgs/a/aniso8601 { };
+aniso8601 = callPackage ../pkgs/a/aniso8601 { };
 
-ansible = callPackage ../all-pkgs/a/ansible { };
+ansible = callPackage ../pkgs/a/ansible { };
 
-antlr4-python3-runtime = callPackage ../all-pkgs/a/antlr4-python3-runtime { };
+antlr4-python3-runtime = callPackage ../pkgs/a/antlr4-python3-runtime { };
 
-apache-libcloud = callPackage ../all-pkgs/a/apache-libcloud { };
+apache-libcloud = callPackage ../pkgs/a/apache-libcloud { };
 
-appdirs = callPackage ../all-pkgs/a/appdirs {
+appdirs = callPackage ../pkgs/a/appdirs {
   buildPythonPackage = self.buildBootstrapPythonPackage;
 };
 
-apscheduler = callPackage ../all-pkgs/a/apscheduler { };
+apscheduler = callPackage ../pkgs/a/apscheduler { };
 
-asciinema = callPackage ../all-pkgs/a/asciinema { };
+asciinema = callPackage ../pkgs/a/asciinema { };
 
-asn1crypto = callPackage ../all-pkgs/a/asn1crypto { };
+asn1crypto = callPackage ../pkgs/a/asn1crypto { };
 
-astroid = callPackage ../all-pkgs/a/astroid { };
+astroid = callPackage ../pkgs/a/astroid { };
 
-attr = callPackage ../all-pkgs/p/python-attr { };
+attr = callPackage ../pkgs/p/python-attr { };
 
-attrs = callPackage ../all-pkgs/a/attrs { };
+attrs = callPackage ../pkgs/a/attrs { };
 
-automat = callPackage ../all-pkgs/a/automat { };
+automat = callPackage ../pkgs/a/automat { };
 
-autotorrent = callPackage ../all-pkgs/a/autotorrent { };
+autotorrent = callPackage ../pkgs/a/autotorrent { };
 
-aws-cli = callPackage ../all-pkgs/a/aws-cli { };
+aws-cli = callPackage ../pkgs/a/aws-cli { };
 
-babel = callPackage ../all-pkgs/b/babel { };
+babel = callPackage ../pkgs/b/babel { };
 
-babelfish = callPackage ../all-pkgs/b/babelfish { };
+babelfish = callPackage ../pkgs/b/babelfish { };
 
 backports-ssl-match-hostname =
-  callPackage ../all-pkgs/b/backports-ssl-match-hostname { };
+  callPackage ../pkgs/b/backports-ssl-match-hostname { };
 
-bazaar = callPackage ../all-pkgs/b/bazaar { };
+bazaar = callPackage ../pkgs/b/bazaar { };
 
-bcrypt = callPackage ../all-pkgs/b/bcrypt { };
+bcrypt = callPackage ../pkgs/b/bcrypt { };
 
-beautifulsoup = callPackage ../all-pkgs/b/beautifulsoup { };
+beautifulsoup = callPackage ../pkgs/b/beautifulsoup { };
 
-beets = callPackage ../all-pkgs/b/beets {
+beets = callPackage ../pkgs/b/beets {
   channel = "stable";
 };
-beets_head = callPackage ../all-pkgs/b/beets {
+beets_head = callPackage ../pkgs/b/beets {
   channel = "head";
 };
 
-bleach = callPackage ../all-pkgs/b/bleach { };
+bleach = callPackage ../pkgs/b/bleach { };
 
-blist = callPackage ../all-pkgs/b/blist { };
+blist = callPackage ../pkgs/b/blist { };
 
-boost_1-66 = callPackage ../all-pkgs/b/boost/python.nix {
+boost_1-66 = callPackage ../pkgs/b/boost/python.nix {
   channel = "1.66";
 };
-boost_1-70 = callPackage ../all-pkgs/b/boost/python.nix {
+boost_1-70 = callPackage ../pkgs/b/boost/python.nix {
   channel = "1.70";
 };
 boost = callPackageAlias "boost_1-70" { };
 
-borgbackup = callPackage ../all-pkgs/b/borgbackup { };
+borgbackup = callPackage ../pkgs/b/borgbackup { };
 
-borgmatic = callPackage ../all-pkgs/b/borgmatic { };
+borgmatic = callPackage ../pkgs/b/borgmatic { };
 
-botocore = callPackage ../all-pkgs/b/botocore { };
+botocore = callPackage ../pkgs/b/botocore { };
 
-brotli = callPackage ../all-pkgs/b/brotli/python.nix {
+brotli = callPackage ../pkgs/b/brotli/python.nix {
   brotli = pkgs.brotli;
 };
 
-bzrtools = callPackage ../all-pkgs/b/bzrtools { };
+bzrtools = callPackage ../pkgs/b/bzrtools { };
 
-canonicaljson = callPackage ../all-pkgs/c/canonicaljson { };
+canonicaljson = callPackage ../pkgs/c/canonicaljson { };
 
-#certbot = callPackage ../all-pkgs/c/certbot { };
+#certbot = callPackage ../pkgs/c/certbot { };
 
-certifi = callPackage ../all-pkgs/c/certifi { };
+certifi = callPackage ../pkgs/c/certifi { };
 
-cffi = callPackage ../all-pkgs/c/cffi { };
+cffi = callPackage ../pkgs/c/cffi { };
 
-characteristic = callPackage ../all-pkgs/c/characteristic { };
+characteristic = callPackage ../pkgs/c/characteristic { };
 
-chardet = callPackage ../all-pkgs/c/chardet { };
+chardet = callPackage ../pkgs/c/chardet { };
 
-cheetah = callPackage ../all-pkgs/c/cheetah { };
+cheetah = callPackage ../pkgs/c/cheetah { };
 
-cheroot = callPackage ../all-pkgs/c/cheroot { };
+cheroot = callPackage ../pkgs/c/cheroot { };
 
-cherrypy = callPackage ../all-pkgs/c/cherrypy { };
+cherrypy = callPackage ../pkgs/c/cherrypy { };
 
-click = callPackage ../all-pkgs/c/click { };
+click = callPackage ../pkgs/c/click { };
 
-colorama = callPackage ../all-pkgs/c/colorama { };
+colorama = callPackage ../pkgs/c/colorama { };
 
-colorclass = callPackage ../all-pkgs/c/colorclass { };
+colorclass = callPackage ../pkgs/c/colorclass { };
 
-constantly = callPackage ../all-pkgs/c/constantly { };
+constantly = callPackage ../pkgs/c/constantly { };
 
-cryptography = callPackage ../all-pkgs/c/cryptography { };
+cryptography = callPackage ../pkgs/c/cryptography { };
 
-cryptography-vectors = callPackage ../all-pkgs/c/cryptography-vectors { };
+cryptography-vectors = callPackage ../pkgs/c/cryptography-vectors { };
 
-cvs2svn = callPackage ../all-pkgs/c/cvs2svn { };
+cvs2svn = callPackage ../pkgs/c/cvs2svn { };
 
-cython = callPackage ../all-pkgs/c/cython { };
+cython = callPackage ../pkgs/c/cython { };
 
-daemonize = callPackage ../all-pkgs/d/daemonize { };
+daemonize = callPackage ../pkgs/d/daemonize { };
 
-dbus-python = callPackage ../all-pkgs/d/dbus-python { };
+dbus-python = callPackage ../pkgs/d/dbus-python { };
 
-debtcollector = callPackage ../all-pkgs/d/debtcollector { };
+debtcollector = callPackage ../pkgs/d/debtcollector { };
 
-decorator = callPackage ../all-pkgs/d/decorator { };
+decorator = callPackage ../pkgs/d/decorator { };
 
-defusedxml = callPackage ../all-pkgs/d/defusedxml { };
+defusedxml = callPackage ../pkgs/d/defusedxml { };
 
-deluge = callPackage ../all-pkgs/d/deluge {
+deluge = callPackage ../pkgs/d/deluge {
   channel = "stable";
 };
-deluge_head = callPackage ../all-pkgs/d/deluge {
+deluge_head = callPackage ../pkgs/d/deluge {
   channel = "head";
 };
 
-deluge-client = callPackage ../all-pkgs/d/deluge-client { };
+deluge-client = callPackage ../pkgs/d/deluge-client { };
 
-diffoscope = callPackage ../all-pkgs/d/diffoscope { };
+diffoscope = callPackage ../pkgs/d/diffoscope { };
 
-discogs-client = callPackage ../all-pkgs/d/discogs-client { };
+discogs-client = callPackage ../pkgs/d/discogs-client { };
 
-dnsdiag = callPackage ../all-pkgs/d/dnsdiag { };
+dnsdiag = callPackage ../pkgs/d/dnsdiag { };
 
-dnspython = callPackage ../all-pkgs/d/dnspython { };
+dnspython = callPackage ../pkgs/d/dnspython { };
 
-docopt = callPackage ../all-pkgs/d/docopt { };
+docopt = callPackage ../pkgs/d/docopt { };
 
-docutils = callPackage ../all-pkgs/d/docutils { };
+docutils = callPackage ../pkgs/d/docutils { };
 
-duplicity = callPackage ../all-pkgs/d/duplicity { };
+duplicity = callPackage ../pkgs/d/duplicity { };
 
-enum34 = callPackage ../all-pkgs/e/enum34 { };
+enum34 = callPackage ../pkgs/e/enum34 { };
 
-etcd = callPackage ../all-pkgs/e/etcd-py { };
+etcd = callPackage ../pkgs/e/etcd-py { };
 
-fasteners = callPackage ../all-pkgs/f/fasteners { };
+fasteners = callPackage ../pkgs/f/fasteners { };
 
-fido2 = callPackage ../all-pkgs/f/fido2 { };
+fido2 = callPackage ../pkgs/f/fido2 { };
 
-flask = callPackage ../all-pkgs/f/flask { };
+flask = callPackage ../pkgs/f/flask { };
 
-flask-compress = callPackage ../all-pkgs/f/flask-compress { };
+flask-compress = callPackage ../pkgs/f/flask-compress { };
 
-flask-login = callPackage ../all-pkgs/f/flask-login { };
+flask-login = callPackage ../pkgs/f/flask-login { };
 
-flask-restful = callPackage ../all-pkgs/f/flask-restful { };
+flask-restful = callPackage ../pkgs/f/flask-restful { };
 
-flask-restplus = callPackage ../all-pkgs/f/flask-restplus { };
+flask-restplus = callPackage ../pkgs/f/flask-restplus { };
 
-flexget = callPackage ../all-pkgs/f/flexget { };
+flexget = callPackage ../pkgs/f/flexget { };
 
-fonttools = callPackage ../all-pkgs/f/fonttools { };
+fonttools = callPackage ../pkgs/f/fonttools { };
 
-foolscap = callPackage ../all-pkgs/f/foolscap { };
+foolscap = callPackage ../pkgs/f/foolscap { };
 
-frozendict = callPackage ../all-pkgs/f/frozendict { };
+frozendict = callPackage ../pkgs/f/frozendict { };
 
-funcsigs = callPackage ../all-pkgs/f/funcsigs { };
+funcsigs = callPackage ../pkgs/f/funcsigs { };
 
-functools32 = callPackage ../all-pkgs/f/functools32 { };
+functools32 = callPackage ../pkgs/f/functools32 { };
 
-future = callPackage ../all-pkgs/f/future { };
+future = callPackage ../pkgs/f/future { };
 
-futures = callPackage ../all-pkgs/f/futures { };
+futures = callPackage ../pkgs/f/futures { };
 
-gevent = callPackage ../all-pkgs/g/gevent { };
+gevent = callPackage ../pkgs/g/gevent { };
 
-greenlet = callPackage ../all-pkgs/g/greenlet { };
+greenlet = callPackage ../pkgs/g/greenlet { };
 
-gst-python_1-14 = callPackage ../all-pkgs/g/gst-python {
+gst-python_1-14 = callPackage ../pkgs/g/gst-python {
   channel = "1.14";
   gst-plugins-base = pkgs.gst-plugins-base_1-14;
   gstreamer = pkgs.gstreamer_1-14;
 };
 gst-python = callPackageAlias "gst-python_1-14" { };
 
-guessit = callPackage ../all-pkgs/g/guessit { };
+guessit = callPackage ../pkgs/g/guessit { };
 
-gyp = callPackage ../all-pkgs/g/gyp { };
+gyp = callPackage ../pkgs/g/gyp { };
 
-h2 = callPackage ../all-pkgs/h/h2 { };
+h2 = callPackage ../pkgs/h/h2 { };
 
-hkdf = callPackage ../all-pkgs/h/hkdf { };
+hkdf = callPackage ../pkgs/h/hkdf { };
 
-hpack = callPackage ../all-pkgs/h/hpack { };
+hpack = callPackage ../pkgs/h/hpack { };
 
-html5lib = callPackage ../all-pkgs/h/html5lib { };
+html5lib = callPackage ../pkgs/h/html5lib { };
 
-hyperframe = callPackage ../all-pkgs/h/hyperframe { };
+hyperframe = callPackage ../pkgs/h/hyperframe { };
 
-hyperlink = callPackage ../all-pkgs/h/hyperlink { };
+hyperlink = callPackage ../pkgs/h/hyperlink { };
 
-idna = callPackage ../all-pkgs/i/idna { };
+idna = callPackage ../pkgs/i/idna { };
 
-incremental = callPackage ../all-pkgs/i/incremental { };
+incremental = callPackage ../pkgs/i/incremental { };
 
-iotop = callPackage ../all-pkgs/i/iotop { };
+iotop = callPackage ../pkgs/i/iotop { };
 
-imagesize = callPackage ../all-pkgs/i/imagesize { };
+imagesize = callPackage ../pkgs/i/imagesize { };
 
 ip-associations-python-novaclient-ext =
-  callPackage ../all-pkgs/i/ip-associations-python-novaclient-ext { };
+  callPackage ../pkgs/i/ip-associations-python-novaclient-ext { };
 
-ipaddress = callPackage ../all-pkgs/i/ipaddress { };
+ipaddress = callPackage ../pkgs/i/ipaddress { };
 
-iso8601 = callPackage ../all-pkgs/i/iso8601 { };
+iso8601 = callPackage ../pkgs/i/iso8601 { };
 
-isort = callPackage ../all-pkgs/i/isort { };
+isort = callPackage ../pkgs/i/isort { };
 
-itstool = callPackage ../all-pkgs/i/itstool { };
+itstool = callPackage ../pkgs/i/itstool { };
 
-jaraco-classes = callPackage ../all-pkgs/j/jaraco-classes { };
+jaraco-classes = callPackage ../pkgs/j/jaraco-classes { };
 
-jinja2 = callPackage ../all-pkgs/j/jinja2 { };
+jinja2 = callPackage ../pkgs/j/jinja2 { };
 
-jmespath = callPackage ../all-pkgs/j/jmespath { };
+jmespath = callPackage ../pkgs/j/jmespath { };
 
-jsonschema = callPackage ../all-pkgs/j/jsonschema { };
+jsonschema = callPackage ../pkgs/j/jsonschema { };
 
-keyring = callPackage ../all-pkgs/k/keyring { };
+keyring = callPackage ../pkgs/k/keyring { };
 
-keystoneauth1 = callPackage ../all-pkgs/k/keystoneauth1 { };
+keystoneauth1 = callPackage ../pkgs/k/keystoneauth1 { };
 
-lazy-object-proxy = callPackage ../all-pkgs/l/lazy-object-proxy { };
+lazy-object-proxy = callPackage ../pkgs/l/lazy-object-proxy { };
 
-ldap3 = callPackage ../all-pkgs/l/ldap3 { };
+ldap3 = callPackage ../pkgs/l/ldap3 { };
 
-libarchive-c = callPackage ../all-pkgs/l/libarchive-c { };
+libarchive-c = callPackage ../pkgs/l/libarchive-c { };
 
-libcap-ng = callPackage ../all-pkgs/l/libcap-ng/python.nix { };
+libcap-ng = callPackage ../pkgs/l/libcap-ng/python.nix { };
 
-llfuse = callPackage ../all-pkgs/l/llfuse { };
+llfuse = callPackage ../pkgs/l/llfuse { };
 
-lockfile = callPackage ../all-pkgs/l/lockfile { };
+lockfile = callPackage ../pkgs/l/lockfile { };
 
-lxml = callPackage ../all-pkgs/l/lxml { };
+lxml = callPackage ../pkgs/l/lxml { };
 
-libxml2 = callPackage ../all-pkgs/l/libxml2/python.nix {
+libxml2 = callPackage ../pkgs/l/libxml2/python.nix {
   libxml2 = pkgs.libxml2;
 };
 
-m2crypto = callPackage ../all-pkgs/m/m2crypto { };
+m2crypto = callPackage ../pkgs/m/m2crypto { };
 
-m2r = callPackage ../all-pkgs/m/m2r { };
+m2r = callPackage ../pkgs/m/m2r { };
 
-magic-wormhole = callPackage ../all-pkgs/m/magic-wormhole { };
+magic-wormhole = callPackage ../pkgs/m/magic-wormhole { };
 
-mako = callPackage ../all-pkgs/m/mako { };
+mako = callPackage ../pkgs/m/mako { };
 Mako = callPackageAlias "mako" { };  # DEPRECATED
 
-markupsafe = callPackage ../all-pkgs/m/markupsafe { };
+markupsafe = callPackage ../pkgs/m/markupsafe { };
 
-matrix-angular-sdk = callPackage ../all-pkgs/m/matrix-angular-sdk { };
+matrix-angular-sdk = callPackage ../pkgs/m/matrix-angular-sdk { };
 
-matrix-synapse-ldap3 = callPackage ../all-pkgs/m/matrix-synapse-ldap3 { };
+matrix-synapse-ldap3 = callPackage ../pkgs/m/matrix-synapse-ldap3 { };
 
-mccabe = callPackage ../all-pkgs/m/mccabe { };
+mccabe = callPackage ../pkgs/m/mccabe { };
 
-meson = callPackage ../all-pkgs/m/meson { };
+meson = callPackage ../pkgs/m/meson { };
 
-mercurial = callPackage ../all-pkgs/m/mercurial { };
+mercurial = callPackage ../pkgs/m/mercurial { };
 
-mistune = callPackage ../all-pkgs/m/mistune { };
+mistune = callPackage ../pkgs/m/mistune { };
 
-monotonic = callPackage ../all-pkgs/m/monotonic { };
+monotonic = callPackage ../pkgs/m/monotonic { };
 
-mopidy = callPackage ../all-pkgs/m/mopidy { };
+mopidy = callPackage ../pkgs/m/mopidy { };
 
-more-itertools = callPackage ../all-pkgs/m/more-itertools { };
+more-itertools = callPackage ../pkgs/m/more-itertools { };
 
-mpdris2 = callPackage ../all-pkgs/m/mpdris2 { };
+mpdris2 = callPackage ../pkgs/m/mpdris2 { };
 
-msgpack-python = callPackage ../all-pkgs/m/msgpack-python { };
+msgpack-python = callPackage ../pkgs/m/msgpack-python { };
 
-mutagen = callPackage ../all-pkgs/m/mutagen { };
+mutagen = callPackage ../pkgs/m/mutagen { };
 
-netaddr = callPackage ../all-pkgs/n/netaddr { };
+netaddr = callPackage ../pkgs/n/netaddr { };
 
-netifaces = callPackage ../all-pkgs/n/netifaces { };
+netifaces = callPackage ../pkgs/n/netifaces { };
 
-nevow = callPackage ../all-pkgs/n/nevow { };
+nevow = callPackage ../pkgs/n/nevow { };
 
-oauthlib = callPackage ../all-pkgs/o/oauthlib { };
+oauthlib = callPackage ../pkgs/o/oauthlib { };
 
-olefile = callPackage ../all-pkgs/o/olefile { };
+olefile = callPackage ../pkgs/o/olefile { };
 
 os-diskconfig-python-novaclient-ext =
-  callPackage ../all-pkgs/o/os-diskconfig-python-novaclient-ext { };
+  callPackage ../pkgs/o/os-diskconfig-python-novaclient-ext { };
 
 os-networksv2-python-novaclient-ext =
-  callPackage ../all-pkgs/o/os-networksv2-python-novaclient-ext { };
+  callPackage ../pkgs/o/os-networksv2-python-novaclient-ext { };
 
 os-virtual-interfacesv2-python-novaclient-ext =
-  callPackage ../all-pkgs/o/os-virtual-interfacesv2-python-novaclient-ext { };
+  callPackage ../pkgs/o/os-virtual-interfacesv2-python-novaclient-ext { };
 
-oslo-i18n = callPackage ../all-pkgs/o/oslo-i18n { };
+oslo-i18n = callPackage ../pkgs/o/oslo-i18n { };
 
-oslo-serialization = callPackage ../all-pkgs/o/oslo-serialization { };
+oslo-serialization = callPackage ../pkgs/o/oslo-serialization { };
 
-oslo-utils = callPackage ../all-pkgs/o/oslo-utils { };
+oslo-utils = callPackage ../pkgs/o/oslo-utils { };
 
-packaging = callPackage ../all-pkgs/p/packaging {
+packaging = callPackage ../pkgs/p/packaging {
   buildPythonPackage = self.buildBootstrapPythonPackage;
   inherit (self)
     pyparsing
     six;
 };
 
-paramiko = callPackage ../all-pkgs/p/paramiko { };
+paramiko = callPackage ../pkgs/p/paramiko { };
 
-paste = callPackage ../all-pkgs/p/paste { };
+paste = callPackage ../pkgs/p/paste { };
 
-path-py = callPackage ../all-pkgs/p/path-py { };
+path-py = callPackage ../pkgs/p/path-py { };
 # Deprecated alias
 pathpy = callPackageAlias "path-py" { };
 
-pathlib2 = callPackage ../all-pkgs/p/pathlib2 { };
+pathlib2 = callPackage ../pkgs/p/pathlib2 { };
 
-pbr = callPackage ../all-pkgs/p/pbr { };
+pbr = callPackage ../pkgs/p/pbr { };
 
-phonenumbers = callPackage ../all-pkgs/p/phonenumbers { };
+phonenumbers = callPackage ../pkgs/p/phonenumbers { };
 
-pillow = callPackage ../all-pkgs/p/pillow { };
+pillow = callPackage ../pkgs/p/pillow { };
 
-pip = callPackage ../all-pkgs/p/pip {
+pip = callPackage ../pkgs/p/pip {
   buildPythonPackage = self.buildBootstrapPythonPackage;
 };
 
-ply = callPackage ../all-pkgs/p/ply { };
+ply = callPackage ../pkgs/p/ply { };
 
-portend = callPackage ../all-pkgs/p/portend { };
+portend = callPackage ../pkgs/p/portend { };
 
-prettytable = callPackage ../all-pkgs/p/prettytable { };
+prettytable = callPackage ../pkgs/p/prettytable { };
 
-priority = callPackage ../all-pkgs/p/priority { };
+priority = callPackage ../pkgs/p/priority { };
 
-progressbar = callPackage ../all-pkgs/p/progressbar { };
+progressbar = callPackage ../pkgs/p/progressbar { };
 
-psutil = callPackage ../all-pkgs/p/psutil { };
+psutil = callPackage ../pkgs/p/psutil { };
 
-py = callPackage ../all-pkgs/p/py { };
+py = callPackage ../pkgs/p/py { };
 
-py-bcrypt = callPackage ../all-pkgs/p/py-bcrypt { };
+py-bcrypt = callPackage ../pkgs/p/py-bcrypt { };
 
-py-cpuinfo = callPackage ../all-pkgs/p/py-cpuinfo { };
+py-cpuinfo = callPackage ../pkgs/p/py-cpuinfo { };
 
-py-lua-parser = callPackage ../all-pkgs/p/py-lua-parser { };
+py-lua-parser = callPackage ../pkgs/p/py-lua-parser { };
 
-py-lua-style = callPackage ../all-pkgs/p/py-lua-style { };
+py-lua-style = callPackage ../pkgs/p/py-lua-style { };
 
-pyacoustid = callPackage ../all-pkgs/p/pyacoustid { };
+pyacoustid = callPackage ../pkgs/p/pyacoustid { };
 
-pyasn1 = callPackage ../all-pkgs/p/pyasn1 { };
+pyasn1 = callPackage ../pkgs/p/pyasn1 { };
 
-pyasn1-modules = callPackage ../all-pkgs/p/pyasn1-modules { };
+pyasn1-modules = callPackage ../pkgs/p/pyasn1-modules { };
 
-pycairo = callPackage ../all-pkgs/p/pycairo { };
+pycairo = callPackage ../pkgs/p/pycairo { };
 
-pycountry = callPackage ../all-pkgs/p/pycountry { };
+pycountry = callPackage ../pkgs/p/pycountry { };
 
-pycparser = callPackage ../all-pkgs/p/pycparser { };
+pycparser = callPackage ../pkgs/p/pycparser { };
 
-pycrypto = callPackage ../all-pkgs/p/pycrypto { };
+pycrypto = callPackage ../pkgs/p/pycrypto { };
 
-pycryptodomex = callPackage ../all-pkgs/p/pycryptodomex { };
+pycryptodomex = callPackage ../pkgs/p/pycryptodomex { };
 
-pycryptopp = callPackage ../all-pkgs/p/pycryptopp { };
+pycryptopp = callPackage ../pkgs/p/pycryptopp { };
 
-pydenticon = callPackage ../all-pkgs/p/pydenticon { };
+pydenticon = callPackage ../pkgs/p/pydenticon { };
 
-#pygame = callPackage ../all-pkgs/p/pygame { };
+#pygame = callPackage ../pkgs/p/pygame { };
 
-pygments = callPackage ../all-pkgs/p/pygments { };
+pygments = callPackage ../pkgs/p/pygments { };
 
-pygobject_2 = callPackage ../all-pkgs/p/pygobject {
+pygobject_2 = callPackage ../pkgs/p/pygobject {
   channel = "2.28";
 };
-pygobject_3-30 = callPackage ../all-pkgs/p/pygobject/meson.nix {
+pygobject_3-30 = callPackage ../pkgs/p/pygobject/meson.nix {
   channel = "3.30";
 };
 pygobject = callPackageAlias "pygobject_3-30" { };
@@ -570,137 +570,137 @@ pygobject_nocairo = callPackageAlias "pygobject_3-30" {
   nocairo = true;
 };
 
-pygtk = callPackage ../all-pkgs/p/pygtk { };
+pygtk = callPackage ../pkgs/p/pygtk { };
 
-pyhamcrest = callPackage ../all-pkgs/p/pyhamcrest { };
+pyhamcrest = callPackage ../pkgs/p/pyhamcrest { };
 
-pykka = callPackage ../all-pkgs/p/pykka { };
+pykka = callPackage ../pkgs/p/pykka { };
 
-pykwalify = callPackage ../all-pkgs/p/pykwalify { };
+pykwalify = callPackage ../pkgs/p/pykwalify { };
 
-pylast = callPackage ../all-pkgs/p/pylast { };
+pylast = callPackage ../pkgs/p/pylast { };
 
-pylint = callPackage ../all-pkgs/p/pylint { };
+pylint = callPackage ../pkgs/p/pylint { };
 
-pymacaroons-pynacl = callPackage ../all-pkgs/p/pymacaroons-pynacl { };
+pymacaroons-pynacl = callPackage ../pkgs/p/pymacaroons-pynacl { };
 
-pymysql = callPackage ../all-pkgs/p/pymysql { };
+pymysql = callPackage ../pkgs/p/pymysql { };
 
-pynacl = callPackage ../all-pkgs/p/pynacl { };
+pynacl = callPackage ../pkgs/p/pynacl { };
 
-pynzb = callPackage ../all-pkgs/p/pynzb { };
+pynzb = callPackage ../pkgs/p/pynzb { };
 
-pyodbc = callPackage ../all-pkgs/p/pyodbc { };
+pyodbc = callPackage ../pkgs/p/pyodbc { };
 
-pyopenssl = callPackage ../all-pkgs/p/pyopenssl { };
+pyopenssl = callPackage ../pkgs/p/pyopenssl { };
 
-pyparsing = callPackage ../all-pkgs/p/pyparsing {
+pyparsing = callPackage ../pkgs/p/pyparsing {
   buildPythonPackage = self.buildBootstrapPythonPackage;
 };
 
-pyrax = callPackage ../all-pkgs/p/pyrax { };
+pyrax = callPackage ../pkgs/p/pyrax { };
 
-pyrss2gen = callPackage ../all-pkgs/p/pyrss2gen { };
+pyrss2gen = callPackage ../pkgs/p/pyrss2gen { };
 
-pysaml2 = callPackage ../all-pkgs/p/pysaml2 { };
+pysaml2 = callPackage ../pkgs/p/pysaml2 { };
 
-pyscard = callPackage ../all-pkgs/p/pyscard { };
+pyscard = callPackage ../pkgs/p/pyscard { };
 
-pyserial = callPackage ../all-pkgs/p/pyserial { };
+pyserial = callPackage ../pkgs/p/pyserial { };
 
-pytest = callPackage ../all-pkgs/p/pytest { };
+pytest = callPackage ../pkgs/p/pytest { };
 
-pytest-benchmark = callPackage ../all-pkgs/p/pytest-benchmark { };
+pytest-benchmark = callPackage ../pkgs/p/pytest-benchmark { };
 
-pytest-capturelog = callPackage ../all-pkgs/p/pytest-capturelog { };
+pytest-capturelog = callPackage ../pkgs/p/pytest-capturelog { };
 
-pytest-runner = callPackage ../all-pkgs/p/pytest-runner { };
+pytest-runner = callPackage ../pkgs/p/pytest-runner { };
 
-python-dateutil = callPackage ../all-pkgs/p/python-dateutil { };
+python-dateutil = callPackage ../pkgs/p/python-dateutil { };
 
-python-etcd = callPackage ../all-pkgs/p/python-etcd { };
+python-etcd = callPackage ../pkgs/p/python-etcd { };
 
-python-ldap = callPackage ../all-pkgs/p/python-ldap { };
+python-ldap = callPackage ../pkgs/p/python-ldap { };
 
-python-magic = callPackage ../all-pkgs/p/python-magic { };
+python-magic = callPackage ../pkgs/p/python-magic { };
 
-python-mpd2 = callPackage ../all-pkgs/p/python-mpd2 { };
+python-mpd2 = callPackage ../pkgs/p/python-mpd2 { };
 
-python-novaclient = callPackage ../all-pkgs/p/python-novaclient { };
+python-novaclient = callPackage ../pkgs/p/python-novaclient { };
 
-python-tvrage = callPackage ../all-pkgs/p/python-tvrage { };
+python-tvrage = callPackage ../pkgs/p/python-tvrage { };
 
-pytz = callPackage ../all-pkgs/p/pytz { };
+pytz = callPackage ../pkgs/p/pytz { };
 
-pyudev = callPackage ../all-pkgs/p/pyudev { };
+pyudev = callPackage ../pkgs/p/pyudev { };
 
-pyusb = callPackage ../all-pkgs/p/pyusb { };
+pyusb = callPackage ../pkgs/p/pyusb { };
 
-pyutil = callPackage ../all-pkgs/p/pyutil { };
+pyutil = callPackage ../pkgs/p/pyutil { };
 
-pywbem = callPackage ../all-pkgs/p/pywbem { };
+pywbem = callPackage ../pkgs/p/pywbem { };
 
-pyyaml = callPackage ../all-pkgs/p/pyyaml { };
+pyyaml = callPackage ../pkgs/p/pyyaml { };
 
-pyzmq = callPackage ../all-pkgs/p/pyzmq { };
+pyzmq = callPackage ../pkgs/p/pyzmq { };
 
 rackspace-auth-openstack =
-  callPackage ../all-pkgs/r/rackspace-auth-openstack { };
+  callPackage ../pkgs/r/rackspace-auth-openstack { };
 
-rackspace-novaclient = callPackage ../all-pkgs/r/rackspace-novaclient { };
+rackspace-novaclient = callPackage ../pkgs/r/rackspace-novaclient { };
 
-rarfile = callPackage ../all-pkgs/r/rarfile { };
+rarfile = callPackage ../pkgs/r/rarfile { };
 
 rax-default-network-flags-python-novaclient-ext =
-  callPackage ../all-pkgs/r/rax-default-network-flags-python-novaclient-ext { };
+  callPackage ../pkgs/r/rax-default-network-flags-python-novaclient-ext { };
 
 rax-scheduled-images-python-novaclient-ext =
-  callPackage ../all-pkgs/r/rax-scheduled-images-python-novaclient-ext { };
+  callPackage ../pkgs/r/rax-scheduled-images-python-novaclient-ext { };
 
-rebulk = callPackage ../all-pkgs/r/rebulk { };
+rebulk = callPackage ../pkgs/r/rebulk { };
 
-regex = callPackage ../all-pkgs/r/regex { };
+regex = callPackage ../pkgs/r/regex { };
 
-rencode = callPackage ../all-pkgs/r/rencode { };
+rencode = callPackage ../pkgs/r/rencode { };
 
-repoze-who = callPackage ../all-pkgs/r/repoze-who { };
+repoze-who = callPackage ../pkgs/r/repoze-who { };
 
-requests = callPackage ../all-pkgs/r/requests { };
+requests = callPackage ../pkgs/r/requests { };
 
-requests-toolbelt = callPackage ../all-pkgs/r/requests-toolbelt { };
+requests-toolbelt = callPackage ../pkgs/r/requests-toolbelt { };
 
-rpyc = callPackage ../all-pkgs/r/rpyc { };
+rpyc = callPackage ../pkgs/r/rpyc { };
 
-rsa = callPackage ../all-pkgs/r/rsa { };
+rsa = callPackage ../pkgs/r/rsa { };
 
-ruamel-yaml = callPackage ../all-pkgs/r/ruamel-yaml { };
+ruamel-yaml = callPackage ../pkgs/r/ruamel-yaml { };
 
-s3transfer = callPackage ../all-pkgs/s/s3transfer { };
+s3transfer = callPackage ../pkgs/s/s3transfer { };
 
-safe = callPackage ../all-pkgs/s/safe { };
+safe = callPackage ../pkgs/s/safe { };
 
-salt_2016-11 = callPackage ../all-pkgs/s/salt {
+salt_2016-11 = callPackage ../pkgs/s/salt {
   channel = "2016.11";
 };
-salt_2017-7 = callPackage ../all-pkgs/s/salt {
+salt_2017-7 = callPackage ../pkgs/s/salt {
   channel = "2017.7";
 };
-salt_head = callPackage ../all-pkgs/s/salt {
+salt_head = callPackage ../pkgs/s/salt {
   channel = "head";
 };
 salt = callPackageAlias "salt_2016-11" { };
 
-scandir = callPackage ../all-pkgs/s/scandir { };
+scandir = callPackage ../pkgs/s/scandir { };
 
-scons = callPackage ../all-pkgs/s/scons { };
+scons = callPackage ../pkgs/s/scons { };
 
-secretstorage = callPackage ../all-pkgs/s/secretstorage { };
+secretstorage = callPackage ../pkgs/s/secretstorage { };
 
-service-identity = callPackage ../all-pkgs/s/service-identity { };
+service-identity = callPackage ../pkgs/s/service-identity { };
 
-setproctitle = callPackage ../all-pkgs/s/setproctitle { };
+setproctitle = callPackage ../pkgs/s/setproctitle { };
 
-setuptools = callPackage ../all-pkgs/s/setuptools {
+setuptools = callPackage ../pkgs/s/setuptools {
   buildPythonPackage = self.buildBootstrapPythonPackage;
   inherit (self)
     appdirs
@@ -709,112 +709,112 @@ setuptools = callPackage ../all-pkgs/s/setuptools {
     six;
 };
 
-setuptools-scm = callPackage ../all-pkgs/s/setuptools-scm { };
+setuptools-scm = callPackage ../pkgs/s/setuptools-scm { };
 
-setuptools-trial = callPackage ../all-pkgs/s/setuptools-trial { };
+setuptools-trial = callPackage ../pkgs/s/setuptools-trial { };
 
-signedjson = callPackage ../all-pkgs/s/signedjson { };
+signedjson = callPackage ../pkgs/s/signedjson { };
 
-simplejson = callPackage ../all-pkgs/s/simplejson { };
+simplejson = callPackage ../pkgs/s/simplejson { };
 
-six = callPackage ../all-pkgs/s/six {
+six = callPackage ../pkgs/s/six {
   buildPythonPackage = self.buildBootstrapPythonPackage;
 };
 
-slimit = callPackage ../all-pkgs/s/slimit { };
+slimit = callPackage ../pkgs/s/slimit { };
 
-snowballstemmer = callPackage ../all-pkgs/s/snowballstemmer { };
+snowballstemmer = callPackage ../pkgs/s/snowballstemmer { };
 
-spake2 = callPackage ../all-pkgs/s/spake2 { };
+spake2 = callPackage ../pkgs/s/spake2 { };
 
-speedtest-cli = callPackage ../all-pkgs/s/speedtest-cli { };
+speedtest-cli = callPackage ../pkgs/s/speedtest-cli { };
 
-sphinx = callPackage ../all-pkgs/s/sphinx { };
+sphinx = callPackage ../pkgs/s/sphinx { };
 
 sphinxcontrib-websupport =
-  callPackage ../all-pkgs/s/sphinxcontrib-websupport { };
+  callPackage ../pkgs/s/sphinxcontrib-websupport { };
 
-sqlalchemy = callPackage ../all-pkgs/s/sqlalchemy { };
+sqlalchemy = callPackage ../pkgs/s/sqlalchemy { };
 
-stevedore = callPackage ../all-pkgs/s/stevedore { };
+stevedore = callPackage ../pkgs/s/stevedore { };
 
-sydent = callPackage ../all-pkgs/s/sydent { };
+sydent = callPackage ../pkgs/s/sydent { };
 
-synapse = callPackage ../all-pkgs/s/synapse { };
+synapse = callPackage ../pkgs/s/synapse { };
 
-tahoe-lafs = callPackage ../all-pkgs/t/tahoe-lafs { };
+tahoe-lafs = callPackage ../pkgs/t/tahoe-lafs { };
 
-tempora = callPackage ../all-pkgs/t/tempora { };
+tempora = callPackage ../pkgs/t/tempora { };
 
-terminaltables = callPackage ../all-pkgs/t/terminaltables { };
+terminaltables = callPackage ../pkgs/t/terminaltables { };
 
-tmdb3 = callPackage ../all-pkgs/t/tmdb3 { };
+tmdb3 = callPackage ../pkgs/t/tmdb3 { };
 
-tornado = callPackage ../all-pkgs/t/tornado { };
+tornado = callPackage ../pkgs/t/tornado { };
 
 transmission-remote-gnome =
-  callPackage ../all-pkgs/t/transmission-remote-gnome { };
+  callPackage ../pkgs/t/transmission-remote-gnome { };
 
-transmissionrpc = callPackage ../all-pkgs/t/transmissionrpc { };
+transmissionrpc = callPackage ../pkgs/t/transmissionrpc { };
 
-twisted = callPackage ../all-pkgs/t/twisted { };
+twisted = callPackage ../pkgs/t/twisted { };
 
-typed-ast = callPackage ../all-pkgs/t/typed-ast { };
+typed-ast = callPackage ../pkgs/t/typed-ast { };
 
-typing = callPackage ../all-pkgs/t/typing { };
+typing = callPackage ../pkgs/t/typing { };
 
-tzlocal = callPackage ../all-pkgs/t/tzlocal { };
+tzlocal = callPackage ../pkgs/t/tzlocal { };
 
-ujson = callPackage ../all-pkgs/u/ujson { };
+ujson = callPackage ../pkgs/u/ujson { };
 
-unidecode = callPackage ../all-pkgs/u/unidecode { };
+unidecode = callPackage ../pkgs/u/unidecode { };
 
-unpaddedbase64 = callPackage ../all-pkgs/u/unpaddedbase64 { };
+unpaddedbase64 = callPackage ../pkgs/u/unpaddedbase64 { };
 
-urllib3 = callPackage ../all-pkgs/u/urllib3 { };
+urllib3 = callPackage ../pkgs/u/urllib3 { };
 
-vapoursynth = callPackage ../all-pkgs/v/vapoursynth { };
-vapoursynth_head = callPackage ../all-pkgs/v/vapoursynth {
+vapoursynth = callPackage ../pkgs/v/vapoursynth { };
+vapoursynth_head = callPackage ../pkgs/v/vapoursynth {
   channel = "head";
 };
 
-vcversioner = callPackage ../all-pkgs/v/vcversioner { };
+vcversioner = callPackage ../pkgs/v/vcversioner { };
 
-waf = callPackage ../all-pkgs/w/waf { };
+waf = callPackage ../pkgs/w/waf { };
 
-webencodings = callPackage ../all-pkgs/w/webencodings { };
+webencodings = callPackage ../pkgs/w/webencodings { };
 
-webob = callPackage ../all-pkgs/w/webob { };
+webob = callPackage ../pkgs/w/webob { };
 
-werkzeug = callPackage ../all-pkgs/w/werkzeug { };
+werkzeug = callPackage ../pkgs/w/werkzeug { };
 
-wheel = callPackage ../all-pkgs/w/wheel {
+wheel = callPackage ../pkgs/w/wheel {
   buildPythonPackage = self.buildBootstrapPythonPackage;
 };
 
-wrapt = callPackage ../all-pkgs/w/wrapt { };
+wrapt = callPackage ../pkgs/w/wrapt { };
 
-xcb-proto = callPackage ../all-pkgs/x/xcb-proto { };
+xcb-proto = callPackage ../pkgs/x/xcb-proto { };
 
-yapf = callPackage ../all-pkgs/y/yapf { };
+yapf = callPackage ../pkgs/y/yapf { };
 
-youtube-dl = callPackage ../all-pkgs/y/youtube-dl { };
+youtube-dl = callPackage ../pkgs/y/youtube-dl { };
 
-yubikey-manager = callPackage ../all-pkgs/y/yubikey-manager { };
+yubikey-manager = callPackage ../pkgs/y/yubikey-manager { };
 
-zbase32 = callPackage ../all-pkgs/z/zbase32 { };
+zbase32 = callPackage ../pkgs/z/zbase32 { };
 
-zc-lockfile = callPackage ../all-pkgs/z/zc-lockfile { };
+zc-lockfile = callPackage ../pkgs/z/zc-lockfile { };
 
-zfec = callPackage ../all-pkgs/z/zfec { };
+zfec = callPackage ../pkgs/z/zfec { };
 
-zope-component = callPackage ../all-pkgs/z/zope-component { };
+zope-component = callPackage ../pkgs/z/zope-component { };
 
-zope-event = callPackage ../all-pkgs/z/zope-event { };
+zope-event = callPackage ../pkgs/z/zope-event { };
 
-zope-interface = callPackage ../all-pkgs/z/zope-interface { };
+zope-interface = callPackage ../pkgs/z/zope-interface { };
 
-zxcvbn-python = callPackage ../all-pkgs/z/zxcvbn-python { };
+zxcvbn-python = callPackage ../pkgs/z/zxcvbn-python { };
 
 ################################################################################
 ################################################################################

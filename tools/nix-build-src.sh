@@ -22,7 +22,7 @@ TMPDIR="$(mktemp -d)"
 
 # Find the top level of nixpkgs
 cd "$(readlink -f "$0" | xargs dirname)"
-while ! [ -d "pkgs/top-level" ]; do
+while ! [ -d "sets" ]; do
   cd ..
 done
 TOP_LEVEL="$(pwd)"

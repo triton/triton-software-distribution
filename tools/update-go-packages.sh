@@ -50,13 +50,13 @@ source concurrent.lib.sh
 CONCURRENT_LOG_DIR="$TMPDIR/logs"
 
 # Find the top git level
-while ! [ -d "pkgs/top-level" ]; do
+while ! [ -d "sets" ]; do
   cd ..
 done
 TOP_LEVEL="$(pwd)"
 
 get_drv_dir() {
-  echo "$TOP_LEVEL/pkgs/all-pkgs/${1:0:1}/$1"
+  echo "$TOP_LEVEL/pkgs/${1:0:1}/$1"
 }
 
 # Build all of the packages needed to run this script
@@ -237,7 +237,7 @@ do_update() {
 ARGS=()
 for pkg in "$@"; do
   if [ "$pkg" = "*" ]; then
-    for pkg in $(grep '= callPackage ../all-pkgs' "$TOP_LEVEL"/pkgs/top-level/go-packages.nix | grep -v 'Go' | awk '{print $1}'); do
+    for pkg in $(grep '= callPackage ../pkgs' "$TOP_LEVEL"/sets/go-packages.nix | grep -v 'Go' | awk '{print $1}'); do
       ARGS+=('-' "Update $pkg" do_update "$pkg")
     done
   else

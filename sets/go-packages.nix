@@ -13,45 +13,45 @@ let
   self = {
 
   # Core packages for building all of the rest
-  go = callPackage ../all-pkgs/g/go {
+  go = callPackage ../pkgs/g/go {
     inherit channel;
   };
-  buildGo = callPackage ../all-pkgs/g/go/build.nix { };
-  fetchGo = callPackage ../all-pkgs/g/go/fetch.nix { };
+  buildGo = callPackage ../pkgs/g/go/build.nix { };
+  fetchGo = callPackage ../pkgs/g/go/fetch.nix { };
 
   # Packages
-  consul = callPackage ../all-pkgs/c/consul { };
+  consul = callPackage ../pkgs/c/consul { };
 
-  consul-template = callPackage ../all-pkgs/c/consul-template { };
+  consul-template = callPackage ../pkgs/c/consul-template { };
 
-  dnscrypt-proxy = callPackage ../all-pkgs/d/dnscrypt-proxy { };
+  dnscrypt-proxy = callPackage ../pkgs/d/dnscrypt-proxy { };
 
-  elvish = callPackage ../all-pkgs/e/elvish { };
+  elvish = callPackage ../pkgs/e/elvish { };
 
-  etcd = callPackage ../all-pkgs/e/etcd { };
+  etcd = callPackage ../pkgs/e/etcd { };
 
-  hugo = callPackage ../all-pkgs/h/hugo { };
+  hugo = callPackage ../pkgs/h/hugo { };
 
-  ipfs = callPackage ../all-pkgs/i/ipfs { };
+  ipfs = callPackage ../pkgs/i/ipfs { };
 
-  ipfs-cluster = callPackage ../all-pkgs/i/ipfs-cluster { };
+  ipfs-cluster = callPackage ../pkgs/i/ipfs-cluster { };
 
-  ipfs-ds-convert = callPackage ../all-pkgs/i/ipfs-ds-convert { };
+  ipfs-ds-convert = callPackage ../pkgs/i/ipfs-ds-convert { };
 
-  lego = callPackage ../all-pkgs/l/lego { };
+  lego = callPackage ../pkgs/l/lego { };
 
-  mc = callPackage ../all-pkgs/m/mc { };
+  mc = callPackage ../pkgs/m/mc { };
 
-  minio = callPackage ../all-pkgs/m/minio { };
+  minio = callPackage ../pkgs/m/minio { };
 
-  nomad = callPackage ../all-pkgs/n/nomad { };
+  nomad = callPackage ../pkgs/n/nomad { };
 
-  rclone = callPackage ../all-pkgs/r/rclone { };
+  rclone = callPackage ../pkgs/r/rclone { };
 
-  syncthing = callPackage ../all-pkgs/s/syncthing { };
+  syncthing = callPackage ../pkgs/s/syncthing { };
 
-  teleport = callPackage ../all-pkgs/t/teleport { };
+  teleport = callPackage ../pkgs/t/teleport { };
 
-  vault = callPackage ../all-pkgs/v/vault { };
+  vault = callPackage ../pkgs/v/vault { };
 
   }; in self

@@ -4,7 +4,7 @@ let
   buildFor = toolsArch:
     let
       crossSystems = import ./cross-systems.nix;
-      pkgsFun = import ../../top-level/all-packages.nix;
+      pkgsFun = import ../../sets/all-packages.nix;
       pkgs = pkgsFun ({ inherit system; } // crossSystems.${toolsArch});
     in import ./make-bootstrap-tools-common.nix {
       inherit (pkgs) stdenv nukeReferences cpio binutilsCross;

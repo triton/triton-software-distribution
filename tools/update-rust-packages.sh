@@ -49,13 +49,13 @@ source concurrent.lib.sh
 CONCURRENT_LOG_DIR="$TMPDIR/logs"
 
 # Find the top git level
-while ! [ -d "pkgs/top-level" ]; do
+while ! [ -d "sets" ]; do
   cd ..
 done
 TOP_LEVEL="$(pwd)"
 
 get_drv_dir() {
-  echo "$TOP_LEVEL/pkgs/all-pkgs/${1:0:1}/$1"
+  echo "$TOP_LEVEL/pkgs/${1:0:1}/$1"
 }
 
 # Build all of the packages needed to run this script
@@ -217,7 +217,7 @@ CRATES_INDEX_HASH="$(tac "$TMPDIR"/log-index | grep -m 1 '\(Hash\|got\):' | awk 
 ARGS=()
 for pkg in "$@"; do
   if [ "$pkg" = "*" ]; then
-    for pkg in $(grep '= callPackage ../all-pkgs' "$TOP_LEVEL"/pkgs/top-level/rust-packages.nix | grep -v '\(Crate\|Cargo\| rust-std\| rustc\| cargo\)' | awk '{print $1}'); do
+    for pkg in $(grep '= callPackage ../pkgs' "$TOP_LEVEL"/sets/rust-packages.nix | grep -v '\(Crate\|Cargo\| rust-std\| rustc\| cargo\)' | awk '{print $1}'); do
       ARGS+=('-' "Update $pkg" do_update "$pkg")
     done
   else

@@ -6,7 +6,7 @@
    $ copy-tarballs.pl --expr 'import <nixpkgs/maintainers/scripts/all-tarballs.nix>'
 */
 
-removeAttrs (import ../../pkgs/top-level/release.nix
+removeAttrs (import ../sets/release.nix
   { # Don't apply ‘hydraJob’ to jobs, because then we can't get to the
     # dependency graph.
     scrubJobs = false;
