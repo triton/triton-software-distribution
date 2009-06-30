@@ -1,16 +1,16 @@
-{stdenv, subversion, sshSupport ? false, openssh ? null}: 
+{stdenv, git}:
 {url, rev ? "HEAD", md5 ? "", sha256 ? ""}:
 
 stdenv.mkDerivation {
-  name = "svn-export";
+  name = "git-export";
   builder = ./builder.sh;
-  buildInputs = [subversion];
+  buildInputs = [git];
 
   outputHashAlgo = if sha256 == "" then "md5" else "sha256";
   outputHashMode = "recursive";
   outputHash = if sha256 == "" then md5 else sha256;
-  
-  inherit url rev sshSupport openssh;
+
+  inherit url rev ;
 
   impureEnvVars = [
     # We borrow these environment variables from the caller to allow
@@ -20,3 +20,4 @@ stdenv.mkDerivation {
     "http_proxy" "https_proxy" "ftp_proxy" "all_proxy" "no_proxy"
     ];
 }
+
