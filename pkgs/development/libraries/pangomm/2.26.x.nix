@@ -1,7 +1,7 @@
-args: with args;
+{ stdenv, fetchurl, pkgconfig, pango, glibmm, cairomm, libpng }:
 
 stdenv.mkDerivation rec {
-  name ="pangomm-2.26.0";
+  name = "pangomm-2.26.0";
 
   src = fetchurl {
     url = "mirror://gnome/sources/pangomm/2.26/${name}.tar.bz2";
