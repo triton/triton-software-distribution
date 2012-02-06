@@ -1,11 +1,11 @@
 { stdenv, fetchurl, m4, cxx ? true }:
 
 stdenv.mkDerivation rec {
-  name = "gmp-5.0.2";
+  name = "gmp-5.0.3";
 
   src = fetchurl {
     url = "mirror://gnu/gmp/${name}.tar.bz2";
-    sha256 = "0a2ch2kpbzrsf3c1pfc6sph87hk2xmwa6np3sn2rzsflzmvdphnv";
+    sha256 = "dcafe9989c7f332b373e1f766af8e9cd790fc802fdec422a1910a6ef783480e3";
   };
 
   buildNativeInputs = [ m4 ];
@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
     homepage = http://gmplib.org/;
     license = "LGPLv3+";
 
-    maintainers = [ stdenv.lib.maintainers.ludo ];
+    maintainers = [ stdenv.lib.maintainers.ludo stdenv.lib.maintainers.simons ];
     platforms = stdenv.lib.platforms.all;
   };
 }
