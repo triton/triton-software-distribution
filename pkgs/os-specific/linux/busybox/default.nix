@@ -30,18 +30,18 @@ let
     CONFIG_INSTALL_NO_USR y
   '';
 
-  staticConfig = (if enableStatic then ''
-      CONFIG_STATIC y
-    '' else "");
+  staticConfig = stdenv.lib.optionalString enableStatic ''
+    CONFIG_STATIC y
+  '';
 
 in
 
 stdenv.mkDerivation rec {
-  name = "busybox-1.19.4";
+  name = "busybox-1.20.1";
 
   src = fetchurl {
     url = "http://busybox.net/downloads/${name}.tar.bz2";
-    sha256 = "1vhh6xa71w4wzby0f4x357fv6zxvkklmyjc8njgbbzv1v83391cv";
+    sha256 = "1jb8xh9a0mc73nmnjz7g5k7ym39vrg7grp7zmgmq71gxps55sl9y";
   };
 
   configurePhase = ''
@@ -64,6 +64,8 @@ stdenv.mkDerivation rec {
         CONFIG_IONICE n
       '' else "");
   };
+
+  enableParallelBuilding = true;
 
   meta = {
     description = "Tiny versions of common UNIX utilities in a single small executable";
