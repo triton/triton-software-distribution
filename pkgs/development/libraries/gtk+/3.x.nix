@@ -1,29 +1,28 @@
-{ stdenv, fetchurl, pkgconfig, glib, atk, pango, cairo, perl, xlibs
-, gdk_pixbuf, xz
-, xineramaSupport ? true
-, cupsSupport ? true, cups ? null
+{ stdenv, fetchurl, pkgconfig, gettext
+, expat, glib, cairo, pango, gdk_pixbuf, atk, at_spi2_atk, xlibs, x11
+, xineramaSupport ? stdenv.isLinux
+, cupsSupport ? stdenv.isLinux, cups ? null
 }:
 
 assert xineramaSupport -> xlibs.libXinerama != null;
 assert cupsSupport -> cups != null;
 
 stdenv.mkDerivation rec {
-  name = "gtk+-3.2.4";
+  name = "gtk+-3.8.2";
 
   src = fetchurl {
-    url = "mirror://gnome/sources/gtk+/3.2/${name}.tar.xz";
-    sha256 = "f981bf514858c00d7084bd6f6c34b3c60b8aebdb959e7aca6faa59ed67c136bd";
+    url = "mirror://gnome/sources/gtk+/3.8/${name}.tar.xz";
+    sha256 = "15zjmyky4yw70ipi12dllira4av8wjpw5f7g9kbrbpx12nf0ra0w";
   };
 
   enableParallelBuilding = true;
 
-  nativeBuildInputs = [ perl pkgconfig ];
-
-  propagatedBuildInputs =
-    [ xlibs.xlibs glib atk pango gdk_pixbuf cairo
-      xlibs.libXrandr xlibs.libXrender xlibs.libXcomposite xlibs.libXi
-    ]
-    ++ stdenv.lib.optional xineramaSupport xlibs.libXinerama
+  nativeBuildInputs = [ pkgconfig gettext ];
+  propagatedBuildInputs = with xlibs; with stdenv.lib;
+    [ expat glib cairo pango gdk_pixbuf atk at_spi2_atk ]
+    ++ optionals stdenv.isLinux [ libXrandr libXrender libXcomposite libXi libXcursor ]
+    ++ optional stdenv.isDarwin x11
+    ++ stdenv.lib.optional xineramaSupport libXinerama
     ++ stdenv.lib.optionals cupsSupport [ cups ];
 
   postInstall = "rm -rf $out/share/gtk-doc";
@@ -47,6 +46,6 @@ stdenv.mkDerivation rec {
     license = "LGPLv2+";
 
     maintainers = with stdenv.lib.maintainers; [urkud raskin];
-    platforms = stdenv.lib.platforms.linux;
+    platforms = stdenv.lib.platforms.all;
   };
 }
