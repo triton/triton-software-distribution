@@ -12,7 +12,7 @@ let
   version = "1.1.0";
 in
 stdenv.mkDerivation rec {
-  name = "libmpc-${version}";
+  name = "mpc-${version}";
 
   src = fetchurl {
     urls = fileUrls version;
