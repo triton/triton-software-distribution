@@ -1,6 +1,6 @@
 { stdenv
 , buildCargo
-, fetchCargo
+, fetchCrate
 , fetchCargoDeps
 , rustc
 }:
@@ -12,7 +12,7 @@ let
     package
     version;
 
-  src = fetchCargo source;
+  src = fetchCrate source;
 
   deps = fetchCargoDeps (builtins.fromJSON (builtins.readFile ./deps.json) // {
     inherit src;
@@ -24,6 +24,10 @@ buildCargo {
   inherit src;
 
   CARGO_DEPS = deps;
+
+  features = [
+    "pcre2"
+  ];
 
   meta = with stdenv.lib; {
     maintainers = with maintainers; [
